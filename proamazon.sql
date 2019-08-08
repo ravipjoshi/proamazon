@@ -83,14 +83,15 @@ VALUES ("BodyCare",400);
 ALTER TABLE products
 ADD product_sales DECIMAL(10,4);
 
-UPDATE product SET product_sales = 2000 where item_id = 1;
-UPDATE product SET product_sales = 3000 where item_id = 2;
-UPDATE product SET product_sales = 5000 where item_id = 3;
-UPDATE product SET product_sales = 1000 where item_id = 4;
-UPDATE product SET product_sales = 8000 where item_id = 5;
-UPDATE product SET product_sales = 0 where item_id = 6;
-UPDATE product SET product_sales = 800 where item_id = 7;
-UPDATE product SET product_sales = 30 where item_id = 8;
-UPDATE product SET product_sales = 50 where item_id = 9;
-UPDATE product SET product_sales = 2000 where item_id = 10;
-UPDATE product SET product_sales = 60 where item_id = 11;
+
+UPDATE products SET product_sales = 2000 where item_id = 1;
+UPDATE products SET product_sales = 3000 where item_id = 2;
+UPDATE products SET product_sales = 5000 where item_id = 3;
+UPDATE products SET product_sales = 1000 where item_id = 4;
+UPDATE products SET product_sales = 8000 where item_id = 5;
+UPDATE products SET product_sales = 0 where item_id = 6;
+UPDATE products SET product_sales = 800 where item_id = 7;
+UPDATE products SET product_sales = 30 where item_id = 8;
+UPDATE products SET product_sales = 50 where item_id = 9;
+UPDATE products SET product_sales = 2000 where item_id = 10;
+UPDATE products SET product_sales = 60 where item_id = 11;

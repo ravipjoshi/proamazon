@@ -68,6 +68,49 @@ connection.connect(function(err) {
 
 */  
 function supervisorView(){
-    
+    inquirer
+    .prompt({
+
+        
+          name: "action",
+            type: "rawlist",
+            message: "What would you like to do?",
+            choices: [
+              "View Products Sales by Department",
+              "Create New Department",
+              "Exit"
+            ]
+
+    })
+    .then(function(choice){
+        switch (choice.action) {
+            case "View Products Sales by Department":
+              viewSalesByDept();
+              break;
+      
+            case "Create New Department":
+              createNewDept();
+              break;
+            
+            case "Exit":
+                  connection.end();  
+              break;
+                
+      
+            default:
+              console.log("Please chose proper choice:");
+              managerView();
+              break;
+            }
+
+    });
+
+}
+
+function viewSalesByDept(){
+
 }
  
+function createNewDept(){
+    
+}
