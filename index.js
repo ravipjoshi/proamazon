@@ -71,19 +71,21 @@ function selectProductToBuy (){
 
 function productAvailability(id,qty)
 {
-    connection.query("SELECT stock_quantity FROM products where ?",{item_id:id}, function(err, res) {
+    connection.query("SELECT stock_quantity, product_sales  FROM products where ?",{item_id:id}, function(err, res) {
         if(err) throw err;
 
-       db_qty = res[0].stock_quantity; 
+       db_qty = res[0].stock_quantity;
+       db_sales = res[0].product_sales; 
        console.log(`Available Quantity is: ${res[0].stock_quantity} `);
        console.log(`Requested Quantity: ${qty}`);
+       console.log(`Total sales is : ${db_sales}`);
          
        if(db_qty>qty)
        {
            console.log("WE HAVE RECEIVED A REQUEST FOR YOUR ORDER. WE CAN FULFILL YOUR REQUEST WITHIN 24 HOURS");
            
            
-           updateProduct(id,db_qty,qty);
+           updateProduct(id,db_qty,qty,db_sales);
          
        }
        else
@@ -95,10 +97,12 @@ function productAvailability(id,qty)
     
 }
 
- function updateProduct(id,ava_qty,req_qty)
+ function updateProduct(id,ava_qty,req_qty,sales)
  {
-    qty = ava_qty-req_qty; 
-    connection.query(`UPDATE products SET stock_quantity=${qty} where ?`,{item_id:id}, function(err, res) {
+    qty = ava_qty-req_qty;
+    var total = parseFloat(qty)*parseFloat(res[0].price);
+    var new_sales = parseFloat(sales) + parseFloat(total); 
+    connection.query(`UPDATE products SET stock_quantity=${qty}, product_sales=${new_sales} where ?`,{item_id:id}, function(err, res) {
         if(err) throw err;
 
         console.log(`Number of record updated are:${res.affectedRows}`);

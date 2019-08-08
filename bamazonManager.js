@@ -232,8 +232,10 @@ function productAvailability(id,qty)
         if(err) throw err;
 
        db_qty = res[0].stock_quantity; 
+       db_sales = res[0].product_sales;
        console.log(`Available Quantity is: ${res[0].stock_quantity} `);
        console.log(`Requested Quantity: ${qty}`);
+       
          
        if(db_qty>qty)
        {

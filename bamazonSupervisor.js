@@ -144,10 +144,10 @@ function createNewDept(){
     .then(function(choice){
       
         connection.query(
-            "INSERT INTO products SET ?",
+            "INSERT INTO departments SET ?",
             {
               department_name: choice.department_name ,
-              over_head_costs :choice.over_head_costs ,
+              over_head_costs:choice.over_head_costs ,
             },
             function(err, res) {
               if (err) throw err;
