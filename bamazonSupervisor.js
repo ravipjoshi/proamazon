@@ -109,8 +109,54 @@ function supervisorView(){
 
 function viewSalesByDept(){
 
+    var query = `select dept.department_id, dept.department_name, dept.over_head_costs, pd.product_sales, (pd.product_sales-dept.over_head_costs) as 'total_profit'
+from bamazon.departments as dept 
+INNER JOIN bamazon.products as pd ON
+(dept.department_name = pd.department_name)  
+where dept.department_name = pd.department_name
+group by dept.department_id, dept.department_name`;
+connection.query(query, function(err, res) {
+    if(err) throw err;
+
+    console.log(`| department_id | department_name | over_head_costs | product_sales | total_profit |`);
+   for(var i=0;i<res.length;i++)
+   {
+    console.log(`|    ${res[i].department_id}     | ${res[i].department_name}|    ${res[i].over_head_costs}     | ${res[i].total_profit} |`);
+   } 
+   supervisorView(); 
+});
 }
- 
+ //INSERT INTO departments (department_name,over_head_costs)
+//VALUES ("Jwellery",2500);
 function createNewDept(){
-    
+    inquirer
+    .prompt([{
+        name: "department_name",
+        type: "input",
+        message: "Enter Name of New Department :"
+
+    },{
+        name: "over_head_costs",
+        type: "input",
+        message: "Enter over head cost of the department:"
+
+    }])
+    .then(function(choice){
+      
+        connection.query(
+            "INSERT INTO products SET ?",
+            {
+              department_name: choice.department_name ,
+              over_head_costs :choice.over_head_costs ,
+            },
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " product inserted!\n");
+              // Call supervisorView AFTER the INSERT completes
+              supervisorView();  
+            });
+       
+
+    });
+
 }

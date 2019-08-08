@@ -205,7 +205,7 @@ function addNewProduct(){
     ])
     .then(function(choice){
       
-        var query = connection.query(
+     connection.query(
             "INSERT INTO products SET ?",
             {
               product_name: choice.product_name ,
