@@ -1,6 +1,8 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-
+var p_id = 0;
+var qty = 0;
+var db_qty=0;
 // create the connection information for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
@@ -24,7 +26,7 @@ connection.connect(function(err) {
 
   });
  
-  
+
 function displayProducts(){
     connection.query("SELECT * FROM products", function(err, res) {
         if(err) throw err;
@@ -37,6 +39,7 @@ function displayProducts(){
     });
 
     selectProductToBuy();
+   
 
   } 
 
@@ -44,23 +47,47 @@ function selectProductToBuy (){
 
     inquirer
     .prompt([{
-        name: "",
+        name: "product_id",
         type: "input",
-        message: ""
+        message: "Enter the id of product you want to buy:"
 
     },  
     {
-        name: "",
+        name: "qty",
         type: "input",
-        message: ""
+        message: "Enter the number of quantity of above selected product:"
     }
     ])
     .then(function(choice){
-
+        
+        p_id = choice.product_id;
+        console.log(choice.product_id);
+        qty = choice.qty;
+        console.log(choice.qty);
+        productAvailability(p_id,qty);
     });
+   // productAvailability(p_id,qty);
+}
 
+function productAvailability(id,qty)
+{
+    connection.query("SELECT stock_quantity FROM products where ?",{item_id:id}, function(err, res) {
+        if(err) throw err;
 
+       db_qty = res[0].stock_quantity; 
+       console.log(`Available Quantity is: ${res[0].stock_quantity} `);
 
+       if(db_qty<qty)
+       {
+           console.log("WE HAVE RECEIVED A REQUEST FOR YOUR ORDER. WE CAN FULFILL YOUR REQUEST WITHIN 24 HOURS");
+       }
+       else
+       {
+          console.log("WE HAVE RECEIVED A REQUEST FOR YOUR ORDER. WE ARE EXTREMLY SORRY FOR THE INCONVINIENCE WE CAN NOT FULL FILL YOUR REQUEST");
+       }
+       
+    });
+    
 }
 
 
