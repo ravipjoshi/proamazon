@@ -80,6 +80,7 @@ function productAvailability(id,qty)
        if(db_qty<qty)
        {
            console.log("WE HAVE RECEIVED A REQUEST FOR YOUR ORDER. WE CAN FULFILL YOUR REQUEST WITHIN 24 HOURS");
+           updateProduct(id,qty);
        }
        else
        {
@@ -90,6 +91,10 @@ function productAvailability(id,qty)
     
 }
 
+function updateProduct(id,qty)
+{
+    
+}
 
 
 //   function runSearch() {
