@@ -1,0 +1,25 @@
+{
+  "name": "proamazon",
+  "version": "1.0.0",
+  "description": "The app will take in orders from customers and deplete stock from the store's inventory.  App can track product sales across the store's departments and then provide a summary of the highest-grossing departments in the store.",
+  "main": "index.js",
+  "dependencies": {
+    "inquirer": "^6.5.0",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravipjoshi/proamazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravipjoshi/proamazon/issues"
+  },
+  "homepage": "https://github.com/ravipjoshi/proamazon#readme"
+}
