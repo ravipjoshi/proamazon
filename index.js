@@ -71,11 +71,12 @@ function selectProductToBuy (){
 
 function productAvailability(id,qty)
 {
-    connection.query("SELECT stock_quantity, product_sales  FROM products where ?",{item_id:id}, function(err, res) {
+    connection.query("SELECT stock_quantity, product_sales, price  FROM products where ?",{item_id:id}, function(err, res) {
         if(err) throw err;
 
        db_qty = res[0].stock_quantity;
        db_sales = res[0].product_sales; 
+       price = res [0].price;
        console.log(`Available Quantity is: ${res[0].stock_quantity} `);
        console.log(`Requested Quantity: ${qty}`);
        console.log(`Total sales is : ${db_sales}`);
@@ -85,7 +86,7 @@ function productAvailability(id,qty)
            console.log("WE HAVE RECEIVED A REQUEST FOR YOUR ORDER. WE CAN FULFILL YOUR REQUEST WITHIN 24 HOURS");
            
            
-           updateProduct(id,db_qty,qty,db_sales);
+           updateProduct(id,db_qty,qty,db_sales,price);
          
        }
        else
@@ -97,16 +98,16 @@ function productAvailability(id,qty)
     
 }
 
- function updateProduct(id,ava_qty,req_qty,sales)
+ function updateProduct(id,ava_qty,req_qty,sales,price)
  {
     qty = ava_qty-req_qty;
-    var total = parseFloat(qty)*parseFloat(res[0].price);
+    var total = parseFloat(qty)*parseFloat(price);
     var new_sales = parseFloat(sales) + parseFloat(total); 
     connection.query(`UPDATE products SET stock_quantity=${qty}, product_sales=${new_sales} where ?`,{item_id:id}, function(err, res) {
         if(err) throw err;
 
         console.log(`Number of record updated are:${res.affectedRows}`);
-        displayOrder(id,req_qty);
+        confirmOrder(id,req_qty,total);
     });
 
     
@@ -114,22 +115,59 @@ function productAvailability(id,qty)
     
  }
 
- function displayOrder(id,qty)
+ function confirmOrder(id,qty,total)
  {
      //console.log("Display order function is called");
+     inquirer
+     .prompt({
+        name: "action",
+            type: "rawlist",
+            message: "What would you like to do?",
+            choices: [
+              "Checkout - Print Invoice",
+              "Cancel Order",
+              "Exit"
+            ]
+     })
+     .then(function(choice){
+        switch (choice.) {
+            case "Checkout - Print Invoice":
+              displayOrder(id,qty,total);
+              break;
+      
+            case "Cancel Order":
+              cancelOrder();
+              break;
+            
+            case "Exit":
+                  connection.end();  
+              break;
+                
+      
+            default:
+              console.log("Please chose proper choice:");
+              managerView();
+              break;
+            }
+     });
+ }
+function displayOrder(id,qty,total){
+
     connection.query(`SELECT product_name,price from products where ?`,{item_id:id},function(err,res){
         if(err) throw err;
 
-        console.log(`Hello User,\n Thank you for Purchasing ${res[0].product_name}`);
-        console.log(` qty  x  price ====> Total`); 
-        console.log(`Quanitiy is : ${qty}`);
-        console.log(`price is : ${res[0].price}`);
-        var total = parseFloat(qty)*parseFloat(res[0].price);
+        console.log(`Hello User,\n Thank you for Purchasing ${res[0].product_name} from Our shop`);
+        console.log(`Product Quanitiy is : ${qty}`);
+            
         
         console.log(`Total Purchase of your order is : ${total} `);
-
        displayProducts();
-    });
- }
+    });   
 
+}
+
+function cancelOrder(){
+
+     console.log("Your order has been cancelled. Do visit us again !");
+}
   
