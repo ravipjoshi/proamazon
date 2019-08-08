@@ -48,3 +48,49 @@ VALUES ("USB WiFi adapter","Plugable USB 2.0 Wireless N 802.11n 150 Mbps Nano Wi
 
 
 SELECT * FROM products;
+/*
+1. Create a new MySQL table called `departments`. Your table should include the following columns:
+
+* department_id
+
+* department_name
+
+* over_head_costs (A dummy number you set for each department)
+*/
+CREATE TABLE departments (
+  department_id INT NOT NULL  AUTO_INCREMENT,
+  department_name VARCHAR(30) NULL,
+  over_head_costs DECIMAL(10,4) NULL,
+  PRIMARY KEY (department_id)
+);
+
+INSERT INTO departments (department_name,over_head_costs)
+VALUES ("Jwellery",2500);
+INSERT INTO departments (department_name,over_head_costs)
+VALUES ("Electronics",700);
+INSERT INTO departments (department_name,over_head_costs)
+VALUES ("Toys",500);
+INSERT INTO departments (department_name,over_head_costs)
+VALUES ("Cosmetics",20);
+INSERT INTO departments (department_name,over_head_costs)
+VALUES ("BodyCare",400);
+
+
+/*2. Modify the products table so that there's a product_sales column, and modify your `bamazonCustomer.js` app so that when a customer purchases anything from the store, the price of the product multiplied by the quantity purchased is added to the product's product_sales column.
+
+* Make sure your app still updates the inventory listed in the `products` column.
+*/
+ALTER TABLE products
+ADD product_sales DECIMAL(10,4);
+
+UPDATE product SET product_sales = 2000 where item_id = 1;
+UPDATE product SET product_sales = 3000 where item_id = 2;
+UPDATE product SET product_sales = 5000 where item_id = 3;
+UPDATE product SET product_sales = 1000 where item_id = 4;
+UPDATE product SET product_sales = 8000 where item_id = 5;
+UPDATE product SET product_sales = 0 where item_id = 6;
+UPDATE product SET product_sales = 800 where item_id = 7;
+UPDATE product SET product_sales = 30 where item_id = 8;
+UPDATE product SET product_sales = 50 where item_id = 9;
+UPDATE product SET product_sales = 2000 where item_id = 10;
+UPDATE product SET product_sales = 60 where item_id = 11;
