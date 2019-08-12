@@ -29,25 +29,43 @@
 6. If you can't get the table to display properly after a few hours, then feel free to go back and just add `total_profit` to the `departments` table.
 */
 
-
+require("dotenv").config();
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var credentials = require("./credentials.js");
 var p_id = 0;
 var qty = 0;
 var db_qty=0;
+var db = credentials.dataBase;
+
+host= db.host;
+console.log(host);
+// Your port; if not 3306
+var port= parseInt(db.port);
+
+// Your username
+var user= db.username;
+console.log(user);
+  console.log(port);
+// Your password
+var password= db.password;
+console.log(password);
+var database= db.dbName;
+console.log(database);
+
 // create the connection information for the sql database
 var connection = mysql.createConnection({
-  host: "localhost",
-
+  host: host,
+ 
   // Your port; if not 3306
-  port: 3306,
+  port: port,
 
   // Your username
-  user: "root",
+  user: user,
 
   // Your password
-  password: "P@ssword",
-  database: "bamazon"
+  password: password,
+  database: database
 });
 
 
