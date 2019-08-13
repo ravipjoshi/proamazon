@@ -72,27 +72,21 @@ App can track product sales across the store's departments and then provide a su
     * Add New Product
 
   * If  user selects `View Products for Sale`, the it will list every available item: the item IDs, names, prices, and quantities.
-
-
         * Working Demo
-                  ![Challenge-2.1](assets\challenge2.1.gif)
+                  ![challenge-2.1](assets\challenge2.1.gif)
 
 
-  * If  user selects `View Low Inventory`, then it will list all items with an inventory count lower than five.
-
-
+  * If  user selects `View Low Inventory`, then it will list all items with an inventory count lower than five
         * Working Demo
-                  ![Challenge-2.2](assets\challenge2.2.gif)
+                  ![challenge-2.2](assets\challenge2.2.gif)
           
   * If  manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
-
         * Working Demo
-                  ![Challenge-2.3](assets\challenge2.3.gif)
+                  ![challenge-2.3](assets\challenge2.3.gif)
       
   * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
-
         * Working Demo
-                  ![Challenge-2.4](assets\challenge2.4.gif)
+                  ![challenge-2.4](..\assets\challenge2.3.gif)
           
 # If you run proamazonManager.js file with command node proamazonManger.js :
 
@@ -104,17 +98,11 @@ App can track product sales across the store's departments and then provide a su
 
 4. When user selects `View Product Sales by Department`, the app should display a summarized table in their terminal/bash window. Use the table below as a guide.
   * Working Demo
-                  ![Challenge-3.1](assets\challenge3.1.gif)
+                  ![challenge-3.1](assets\challenge3.1.gif)
 
 
 5. When user selects create
 
   * Working Demo
-                  ![Challenge-3.2](assets\challenge3.2.gif)
+                  ![challenge-3.2](assets\challenge3.2.gif)
 
-- - -
-
-* Working Demo
-  ![Challenge-3]()
-
-- - -
