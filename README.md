@@ -73,7 +73,7 @@ App can track product sales across the store's departments and then provide a su
 
   * If  user selects `View Products for Sale`, the it will list every available item: the item IDs, names, prices, and quantities.
         * Working Demo
-                  ![challenge-2.1](assets\challenge2.1.gif)
+                  ![challenge-2.1](assets/challenge2.1.gif)
 
 
   * If  user selects `View Low Inventory`, then it will list all items with an inventory count lower than five
